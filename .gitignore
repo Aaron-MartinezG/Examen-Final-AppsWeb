@@ -1,0 +1,23 @@
+# Dependencias de Node (NUNCA subir esto)
+node_modules/
+/node_modules
+*/node_modules
+
+# Archivos de compilación
+dist/
+build/
+
+# Logs y errores
+*.log
+npm-debug.log*
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Configuración de entorno (Claves secretas)
+.env
+
+# Angular
+.angular/
+.vscode/
