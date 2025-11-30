@@ -1,1 +1,14 @@
-@import "bootstrap/scss/bootstrap";
+.my-navbar{
+  background-color: #688391;
+  color: white;
+}
+
+.my-navbar .nav-link,
+.my-navbar .navbar-brand {
+  color: white !important;
+}
+
+.my-navbar .nav-link:hover,
+.my-navbar .navbar-brand:hover {
+  color: #ffeb3b !important;
+}

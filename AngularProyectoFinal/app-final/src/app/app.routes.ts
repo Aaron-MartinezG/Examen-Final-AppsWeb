@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { Navbar } from './components/navbar/navbar';
+import { Inicio } from './components/inicio/inicio';
 
 export const routes: Routes = [
-  {path:'hola', component: Navbar},
-  {}
+  { path: '', redirectTo: 'inicio', pathMatch: 'full'},
+  { path:'inicio', component: Inicio }
 ];

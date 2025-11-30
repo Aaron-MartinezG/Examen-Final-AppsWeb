@@ -1,0 +1,44 @@
+// Altura de la Navbar de Bootstrap (Ajusta si tu Navbar es más alta/baja)
+$navbar-height: 56px;
+
+/* ------------------------------------------- */
+/* SECCIÓN HERO (PANTALLA COMPLETA)            */
+/* ------------------------------------------- */
+.hero-full-screen {
+    // Altura clave: 100% de la ventana menos el Navbar
+    height: calc(100vh - #{$navbar-height});
+
+    // Fondo degradado
+    background: #688391;
+    background: linear-gradient(90deg, #547071 0%, #87A1AB 50%, #C8DFE2 100%);
+
+    // Centrar el contenido
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+        height: 100%;
+        max-width: 900px;
+    }
+
+    h1 {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    }
+}
+
+
+/* ------------------------------------------- */
+/* CARRUSEL Y CONTENIDO SECUNDARIO             */
+/* ------------------------------------------- */
+.carousel-img {
+    height: 500px;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
