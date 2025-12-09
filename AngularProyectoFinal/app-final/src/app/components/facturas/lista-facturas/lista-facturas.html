@@ -1,0 +1,76 @@
+<div class="hero-full-screen">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center mb-4 text-white"><i class="bi bi-receipt me-2"></i> Listado de Facturas</h2>
+      </div>
+    </div>
+
+    <!-- Mensaje de Carga -->
+    @if(cargando()){
+    <div class="d-flex justify-content-center mt-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando datos...</span>
+      </div>
+      <p class="ms-3">Cargando datos de facturas...</p>
+    </div>
+    }
+
+    <!-- Mensaje de Error -->
+    @if(mensajeError){
+    <div class="alert alert-danger mt-4" role="alert">
+      {{ mensajeError }}
+    </div>
+    }
+
+    <!-- Listado de Facturas -->
+    @if(!cargando() && facturas().length > 0){
+    <div class="table-responsive mt-4 shadow-lg rounded-3">
+      <!-- Tabla de Bootstrap -->
+      <table class="table table-hover table-striped table-bordered align-middle">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th>ID</th>
+            <th>ID Cliente</th>
+            <th>Folio</th>
+            <th>Fecha Emisión</th>
+            <th>Fecha Pago</th>
+            <th>Monto</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- CORREGIDO: track item.id_factura -->
+          @for(item of facturas(); track item.id_factura){
+          <tr>
+            <td>{{ item.id_factura }}</td>
+            <td>{{ item.id_cliente }}</td>
+            <td>{{ item.folio }}</td>
+            <td>{{ item.fecha_emision | date:'shortDate' }}</td>
+            <!-- CORREGIDO: El dato de pago no es el monto, es la fecha -->
+            <td>{{ item.fecha_pago | date:'shortDate' }}</td>
+            <td>${{ item.monto | number:'1.2-2' }}</td>
+            <td><span
+                [class]="{'badge bg-success': item.estado === 'Pagada', 'badge bg-warning text-dark': item.estado === 'Pendiente', 'badge bg-danger': item.estado === 'Cancelada'}">{{
+                item.estado }}</span></td>
+            <td>
+              <button class="btn btn-sm btn-outline-info me-2"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+
+    <!-- Mensaje si no hay datos -->
+    @if(!cargando() && facturas().length === 0 && !mensajeError){
+    <div class="alert alert-info text-center mt-4">
+      <i class="bi bi-info-circle me-2"></i> No se encontraron facturas registradas.
+      <a routerLink="/facturas/registro" class="alert-link ms-2">Registra una ahora.</a>
+    </div>
+    }
+  </div>
+</div>

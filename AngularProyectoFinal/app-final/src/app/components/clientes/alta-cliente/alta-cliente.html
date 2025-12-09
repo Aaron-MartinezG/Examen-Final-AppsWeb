@@ -1,128 +1,134 @@
-<div class="d-flex justify-content-center align-items-center min-vh-100 bg-boda">
-    <div class="card-glass" style="max-width: 500px; width: 100%;">
-        <h2 class="text-center mb-4 title-boda">Registro de Clientes</h2>
+<div class="container-fluid bg-light min-vh-100 d-flex align-items-center justify-content-center py-5">
+    <div class="card shadow-lg border-0" style="max-width: 800px; width: 100%;">
+        <div class="card-header bg-primary text-white text-center py-3">
+            <h3 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i>Registro de Clientes</h3>
+        </div>
 
-        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="card-body p-4">
 
-            <!-- Nombre -->
-            <div class="mb-3">
-                <label class="form-label">Nombre completo</label>
-                <input type="text" class="form-control" name="nombre" required [(ngModel)]="model.nombre"
-                    #nombre="ngModel">
-
-                @if (nombre.invalid && nombre.touched) {
-                <div class="text-danger small">
-                    Este campo es obligatorio
-                </div>
-                }
+            <!-- Alertas de Éxito/Error -->
+            <div *ngIf="mensajeExito" class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> {{ mensajeExito }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
-            <!-- Empresa -->
-            <div class="mb-3">
-                <label class="form-label">Empresa</label>
-                <input type="text" class="form-control" name="empresa" required [(ngModel)]="model.empresa"
-                    #empresa="ngModel">
-
-                @if (empresa.invalid && empresa.touched) {
-                <div class="text-danger small">
-                    Este campo es obligatorio
-                </div>
-                }
+            <div *ngIf="mensajeError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ mensajeError }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
-            <!-- Correo -->
-            <div class="mb-3">
-                <label class="form-label">Correo</label>
-                <input type="text" class="form-control" name="correo" required [(ngModel)]="model.correo"
-                    #correo="ngModel">
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
 
-                @if (correo.invalid && correo.touched) {
-                <div class="text-danger small">
-                    Este campo es obligatorio
+                <!-- Sección 1: Datos Personales -->
+                <h5 class="text-secondary mb-3 border-bottom pb-2">Información General</h5>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Nombre Completo <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="nombre" required
+                               [(ngModel)]="model.nombre" #nombre="ngModel"
+                               [ngClass]="{'is-invalid': nombre.invalid && nombre.touched}">
+                        <div *ngIf="nombre.invalid && nombre.touched" class="invalid-feedback">
+                            El nombre es obligatorio.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">RFC <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control text-uppercase" name="rfc" required
+                               [(ngModel)]="model.rfc" #rfc="ngModel"
+                               [ngClass]="{'is-invalid': rfc.invalid && rfc.touched}">
+                        <div *ngIf="rfc.invalid && rfc.touched" class="invalid-feedback">
+                            El RFC es obligatorio.
+                        </div>
+                    </div>
                 </div>
-                }
-            </div>
 
-            <!-- Teléfono -->
-            <div class="mb-3">
-                <label class="form-label">Teléfono</label>
-                <input type="text" class="form-control" name="telefono" required [(ngModel)]="model.telefono"
-                    #telefono="ngModel">
-
-                @if (telefono.invalid && telefono.touched) {
-                <div class="text-danger small">
-                    Este campo es obligatorio
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Correo Electrónico <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" name="correo" required email
+                               [(ngModel)]="model.correo" #correo="ngModel"
+                               [ngClass]="{'is-invalid': correo.invalid && correo.touched}">
+                        <div *ngIf="correo.invalid && correo.touched" class="invalid-feedback">
+                            Ingresa un correo válido.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Teléfono</label>
+                        <input type="tel" class="form-control" name="telefono"
+                               [(ngModel)]="model.telefono" #telefono="ngModel">
+                    </div>
                 </div>
-                }
-            </div>
 
-            <!-- rfc -->
-            <div class="mb-3">
-                <label class="form-label">RFC</label>
-                <input type="text" class="form-control" name="rfc" required [(ngModel)]="model.rfc"
-                    #rfc="ngModel">
-
-                @if (rfc.invalid && rfc.touched) {
-                <div class="text-danger small">
-                    Este campo es obligatorio
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Empresa</label>
+                    <input type="text" class="form-control" name="empresa" required
+                           [(ngModel)]="model.empresa" #empresa="ngModel"
+                           [ngClass]="{'is-invalid': empresa.invalid && empresa.touched}">
+                    <div *ngIf="empresa.invalid && empresa.touched" class="invalid-feedback">
+                        El nombre de la empresa es obligatorio.
+                    </div>
                 </div>
-                }
-            </div>
 
-            <!-- Honorarios mensuakes -->
-            <div class="mb-3">
-                <label class="form-label">Honorarios Mensuales</label>
-                <input type="number" class="form-control" name="honorarios_mensuales" min="1" required
-                    [(ngModel)]="model.honorarios_mensuales" #honorarios_mensuales="ngModel">
+                <!-- Sección 2: Datos del Servicio -->
+                <h5 class="text-secondary mb-3 border-bottom pb-2 mt-4">Detalles del Servicio</h5>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Servicio Contratado <span class="text-danger">*</span></label>
+                        <!-- Usamos Select porque es mejor UX que escribir el número, ya tienes la lista en el TS -->
+                        <select class="form-select" name="id_servicio" required
+                                [(ngModel)]="model.id_servicio" #id_servicio="ngModel"
+                                [ngClass]="{'is-invalid': id_servicio.invalid && id_servicio.touched}">
+                            <option [ngValue]="0" disabled>Selecciona una opción...</option>
+                            <option *ngFor="let s of servicios" [ngValue]="s.id">{{ s.nombre }}</option>
+                        </select>
+                        <div *ngIf="id_servicio.invalid && id_servicio.touched" class="invalid-feedback">
+                            Debes seleccionar un servicio.
+                        </div>
+                    </div>
 
-                @if (honorarios_mensuales.invalid && honorarios_mensuales.touched) {
-                <div class="text-danger small">
-                    Deben de ser de al menos 1
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Honorarios Mensuales <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" name="honorarios_mensuales" required min="1"
+                                   [(ngModel)]="model.honorarios_mensuales" #honorarios="ngModel"
+                                   [ngClass]="{'is-invalid': honorarios.invalid && honorarios.touched}">
+                        </div>
+                        <div *ngIf="honorarios.invalid && honorarios.touched" class="invalid-feedback d-block">
+                            Ingresa un monto válido.
+                        </div>
+                    </div>
                 </div>
-                }
-            </div>
 
-            <!-- Fecha de Inicio -->
-            <div class="mb-3">
-                <label class="form-label">Fecha de Inicio</label>
-                <input type="text" class="form-control" name="fecha_inicio" required [(ngModel)]="model.fecha_inicio"
-                    #fecha_inicio="ngModel">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Fecha de Inicio <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" name="fecha_inicio" required
+                               [(ngModel)]="model.fecha_inicio" #fecha="ngModel"
+                               [ngClass]="{'is-invalid': fecha.invalid && fecha.touched}">
+                    </div>
 
-                @if (fecha_inicio.invalid && fecha_inicio.touched) {
-                <div class="text-danger small">
-                    Este campo es obligatorio
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Estado</label>
+                        <select class="form-select" name="activo" required [(ngModel)]="model.activo">
+                            <option [ngValue]="true">Activo</option>
+                            <option [ngValue]="false">Inactivo</option>
+                        </select>
+                    </div>
                 </div>
-                }
-            </div>
-            <!-- Activo -->
-            <div class="mb-3">
-                <label class="form-label">Activo</label>
-                <select class="form-select" name="activo" required [(ngModel)]="model.activo" #confirma="ngModel">
-                    <option value="">Selecciona...</option>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
-                </select>
 
-                @if (confirma.invalid && confirma.touched) {
-                <div class="text-danger small">
-                    Seleccione una opción
+                <!-- Botones de Acción -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                    <button type="button" class="btn btn-outline-secondary px-4" (click)="f.resetForm(resetModel())">
+                        <i class="bi bi-eraser me-2"></i>Limpiar
+                    </button>
+                    <button type="submit" class="btn btn-primary px-5" [disabled]="f.invalid">
+                        <i class="bi bi-save me-2"></i>Guardar Cliente
+                    </button>
                 </div>
-                }
-            </div>
 
-            <!-- ID Servicio -->
-            <div class="mb-3">
-                <label class="form-label">ID Servicio</label>
-                <input type="number" class="form-control" name="id_servicio" min="1" required
-                    [(ngModel)]="model.id_servicio" #id_servicio="ngModel">
-
-                @if (id_servicio.invalid && id_servicio.touched) {
-                <div class="text-danger small">
-                    Deben de ser de al menos 1
-                </div>
-                }
-            </div>
-
-        </form>
+            </form>
+        </div>
     </div>
 </div>

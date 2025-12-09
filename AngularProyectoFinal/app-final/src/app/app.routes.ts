@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { InicioComponent } from './components/inicio/inicio';
 import { ListaClientesComponent } from './components/clientes/lista-clientes/lista-clientes';
 import { AltaClienteComponent } from './components/clientes/alta-cliente/alta-cliente';
+import { ListaFacturas } from './components/facturas/lista-facturas/lista-facturas';
+import { AltaFactura } from './components/facturas/alta-factura/alta-factura';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -9,8 +11,6 @@ export const routes: Routes = [
   { path:'listaClientes', component: ListaClientesComponent},
   { path: 'altaClientes', component: AltaClienteComponent},
 
-  // Añadimos rutas de Facturas y Servicios para que el menú funcione
-  { path: 'facturas/registro', component: AltaClienteComponent }, // Temporal
-  { path: 'servicios/registro', component: AltaClienteComponent }, // Temporal
-  { path: '**', redirectTo: 'inicio' }
+  { path: 'listaFacturas', component: ListaFacturas},
+  { path: 'altaFacturas', component: AltaFactura}
 ];

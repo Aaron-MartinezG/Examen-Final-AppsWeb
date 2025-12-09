@@ -1,0 +1,96 @@
+<div class="container-fluid bg-light min-vh-100 d-flex align-items-center justify-content-center py-5">
+    <div class="card shadow-lg border-0" style="max-width: 800px; width: 100%;">
+        <div class="card-header bg-success text-white text-center py-3">
+            <h3 class="mb-0"><i class="bi bi-receipt me-2"></i>Nueva Factura</h3>
+        </div>
+
+        <div class="card-body p-4">
+
+            <!-- Alertas -->
+            <div *ngIf="mensajeExito" class="alert alert-success alert-dismissible fade show">
+                <i class="bi bi-check-circle-fill me-2"></i> {{ mensajeExito }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <div *ngIf="mensajeError" class="alert alert-danger alert-dismissible fade show">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ mensajeError }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+                <!-- Sección Cliente y Folio -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Cliente <span class="text-danger">*</span></label>
+                        <select class="form-select" name="id_cliente" required
+                                [(ngModel)]="model.id_cliente" #cliente="ngModel"
+                                [ngClass]="{'is-invalid': cliente.invalid && cliente.touched}">
+                            <option [ngValue]="0" disabled>Selecciona un cliente...</option>
+                            <option *ngFor="let c of clientes" [ngValue]="c.id">
+                                {{ c.nombre }} ({{ c.rfc }})
+                            </option>
+                        </select>
+                        <div *ngIf="cliente.invalid && cliente.touched" class="invalid-feedback">
+                            Selecciona un cliente.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Folio <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="folio" required
+                               [(ngModel)]="model.folio" #folio="ngModel"
+                               placeholder="Ej: F-001"
+                               [ngClass]="{'is-invalid': folio.invalid && folio.touched}">
+                    </div>
+                </div>
+
+                <!-- Fechas -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Fecha de Emisión</label>
+                        <input type="date" class="form-control" name="fecha_emision" required
+                               [(ngModel)]="model.fecha_emision">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Fecha de Pago</label>
+                        <input type="date" class="form-control" name="fecha_pago"
+                               [(ngModel)]="model.fecha_pago">
+                    </div>
+                </div>
+
+                <!-- Monto y Estado -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Monto Total <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" name="monto" required min="0"
+                                   [(ngModel)]="model.monto" #monto="ngModel"
+                                   [ngClass]="{'is-invalid': monto.invalid && monto.touched}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Estado</label>
+                        <select class="form-select" name="estado" required [(ngModel)]="model.estado">
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Pagada">Pagada</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                    <button type="button" class="btn btn-outline-secondary px-4" (click)="f.resetForm(resetModel())">
+                        Limpiar
+                    </button>
+                    <button type="submit" class="btn btn-success px-5" [disabled]="f.invalid">
+                        <i class="bi bi-save me-2"></i> Guardar Factura
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -11,14 +11,12 @@ type ClienteModel = Cliente;
 @Component({
   selector: 'app-alta-cliente',
   standalone: true,
-  // CRUCIAL: Importar FormsModule para formularios dirigidos por plantillas
   imports: [CommonModule, FormsModule],
   templateUrl: './alta-cliente.html',
   styleUrl: './alta-cliente.scss'
 })
 export class AltaClienteComponent implements OnInit {
 
-  // Objeto modelo que enlaza los inputs (el two-way binding)
   model: ClienteModel = this.resetModel();
 
   // Lista de servicios para el dropdown (simulación de la carga GET)

@@ -1,30 +1,30 @@
-<div class="container py-5">
-  <div class="row">
-    <div class="col-12">
-      <h2 class="text-center mb-4 text-primary"><i class="bi bi-people-fill me-2"></i> Listado de Clientes</h2>
+<div class="hero-full-screen">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center mb-4 text-white"><i class="bi bi-people-fill me-2"></i> Listado de Clientes</h2>
+      </div>
     </div>
-  </div>
 
-  <!-- Mensaje de Carga -->
-  @if(cargando()){
+    <!-- Mensaje de Carga -->
+    @if(cargando()){
     <div class="d-flex justify-content-center mt-5">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Cargando datos...</span>
       </div>
       <p class="ms-3">Cargando datos de clientes...</p>
     </div>
-  }
+    }
 
-  <!-- Mensaje de Error -->
-  @if(mensajeError){
+    <!-- Mensaje de Error -->
+    @if(mensajeError){
     <div class="alert alert-danger mt-4" role="alert">
       {{ mensajeError }}
     </div>
-  }
+    }
 
-  <!-- Listado de Clientes -->
-  <!-- Usamos clientes() en lugar de confirmaciones() -->
-  @if(!cargando() && clientes().length > 0){
+    <!-- Listado de Clientes -->
+    @if(!cargando() && clientes().length > 0){
     <div class="table-responsive mt-4 shadow-lg rounded-3">
       <!-- Tabla de Bootstrap -->
       <table class="table table-hover table-striped table-bordered align-middle">
@@ -42,38 +42,39 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Recorremos el signal clientes() -->
           @for(item of clientes(); track item.id){
-            <tr>
-              <td>{{ item.id }}</td>
-              <td>{{ item.nombre }}</td>
-              <td>{{ item.rfc }}</td>
-              <td>{{ item.correo }}</td>
-              <td>${{ item.honorarios_mensuales | number:'1.2-2' }}</td>
-              <td>{{ item.id_servicio }}</td>
-              <!-- Mostrar un ícono si está activo -->
-              <td>
-                <i class="bi"
-                   [ngClass]="{'bi-check-circle-fill text-success': item.activo, 'bi-x-circle-fill text-danger': !item.activo}">
-                </i>
-              </td>
-              <td>{{ item.fecha_inicio | date:'shortDate' }}</td>
-              <td>
-                <button class="btn btn-sm btn-outline-info me-2"><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-              </td>
-            </tr>
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.rfc }}</td>
+            <td>{{ item.correo }}</td>
+            <td>${{ item.honorarios_mensuales | number:'1.2-2' }}</td>
+            <td>{{ item.id_servicio }}</td>
+            <!-- Mostrar un ícono si está activo -->
+            <td>
+              <i class="bi"
+                [ngClass]="{'bi-check-circle-fill text-success': item.activo, 'bi-x-circle-fill text-danger': !item.activo}">
+              </i>
+            </td>
+            <td>{{ item.fecha_inicio | date:'shortDate' }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-info me-2"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+            </td>
+          </tr>
           }
         </tbody>
       </table>
     </div>
-  }
+    }
 
-  <!-- Mensaje si no hay datos -->
-  @if(!cargando() && clientes().length === 0 && !mensajeError){
+    <!-- Mensaje si no hay datos -->
+    @if(!cargando() && clientes().length === 0 && !mensajeError){
     <div class="alert alert-info text-center mt-4">
       <i class="bi bi-info-circle me-2"></i> No se encontraron clientes registrados.
       <a routerLink="/clientes/registro" class="alert-link ms-2">Registra uno ahora.</a>
     </div>
-  }
+    }
+  </div>
+
 </div>
