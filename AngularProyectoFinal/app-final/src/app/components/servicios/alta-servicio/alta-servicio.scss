@@ -1,0 +1,19 @@
+.bg-light {
+    background-color: #A7BFC7 !important;
+}
+
+.card {
+    transition: transform 0.3s;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-header {
+    background: linear-gradient(45deg, #547071, #C8DFE2);
+}
+
+/* Efecto focus en los inputs */
+.form-control:focus, .form-select:focus {
+    border-color: #273c75;
+    box-shadow: 0 0 0 0.25rem rgba(39, 60, 117, 0.25);
+}

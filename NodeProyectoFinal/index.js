@@ -79,6 +79,41 @@ app.get('/facturas', (req, res) => {
   });
 });
 
+//Definimos el endpoint para guardar servicios
+app.post('/servicios', (req, res) => {
+  const { nombre, descripcion, precio_base } = req.body;
+
+  const sql = `INSERT INTO servicios (nombre, descripcion, precio_base)
+              VALUES(?, ?, ?)`;
+
+  connection.query(sql, [nombre, descripcion, precio_base], (err, result) => {
+    if (err) {
+      console.error('Error al insertar en MySQL', err);
+      return res.status(500).json({ message: 'Error guardando en la base de datos', details: err.sqlMessage });
+    }
+
+    console.log('Datos insertados correctamente en MySQL')
+    console.log(result);
+    res.status(201).json({
+      message: 'Registro exitoso.',
+      id: result.insertId
+    })
+  })
+})
+
+// Endpoint para obtener todos los servicios
+app.get('/servicios', (req, res) => {
+  const sql = `SELECT id_servicio AS id, nombre, descripcion, precio_base FROM servicios`;
+
+  connection.query(sql, (err, result) => {
+    if(err){
+      return res.status(500).json({mensaje:"Error al traer los datos"});
+    }
+
+    res.status(200).json(result);
+  });
+});
+
 app.get("/", (req, res) => {
   res.send("Hola desde mi server de express");
 });
