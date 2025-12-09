@@ -1,0 +1,128 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-boda">
+    <div class="card-glass" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center mb-4 title-boda">Registro de Clientes</h2>
+
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+            <!-- Nombre -->
+            <div class="mb-3">
+                <label class="form-label">Nombre completo</label>
+                <input type="text" class="form-control" name="nombre" required [(ngModel)]="model.nombre"
+                    #nombre="ngModel">
+
+                @if (nombre.invalid && nombre.touched) {
+                <div class="text-danger small">
+                    Este campo es obligatorio
+                </div>
+                }
+            </div>
+
+            <!-- Empresa -->
+            <div class="mb-3">
+                <label class="form-label">Empresa</label>
+                <input type="text" class="form-control" name="empresa" required [(ngModel)]="model.empresa"
+                    #empresa="ngModel">
+
+                @if (empresa.invalid && empresa.touched) {
+                <div class="text-danger small">
+                    Este campo es obligatorio
+                </div>
+                }
+            </div>
+
+            <!-- Correo -->
+            <div class="mb-3">
+                <label class="form-label">Correo</label>
+                <input type="text" class="form-control" name="correo" required [(ngModel)]="model.correo"
+                    #correo="ngModel">
+
+                @if (correo.invalid && correo.touched) {
+                <div class="text-danger small">
+                    Este campo es obligatorio
+                </div>
+                }
+            </div>
+
+            <!-- Teléfono -->
+            <div class="mb-3">
+                <label class="form-label">Teléfono</label>
+                <input type="text" class="form-control" name="telefono" required [(ngModel)]="model.telefono"
+                    #telefono="ngModel">
+
+                @if (telefono.invalid && telefono.touched) {
+                <div class="text-danger small">
+                    Este campo es obligatorio
+                </div>
+                }
+            </div>
+
+            <!-- rfc -->
+            <div class="mb-3">
+                <label class="form-label">RFC</label>
+                <input type="text" class="form-control" name="rfc" required [(ngModel)]="model.rfc"
+                    #rfc="ngModel">
+
+                @if (rfc.invalid && rfc.touched) {
+                <div class="text-danger small">
+                    Este campo es obligatorio
+                </div>
+                }
+            </div>
+
+            <!-- Honorarios mensuakes -->
+            <div class="mb-3">
+                <label class="form-label">Honorarios Mensuales</label>
+                <input type="number" class="form-control" name="honorarios_mensuales" min="1" required
+                    [(ngModel)]="model.honorarios_mensuales" #honorarios_mensuales="ngModel">
+
+                @if (honorarios_mensuales.invalid && honorarios_mensuales.touched) {
+                <div class="text-danger small">
+                    Deben de ser de al menos 1
+                </div>
+                }
+            </div>
+
+            <!-- Fecha de Inicio -->
+            <div class="mb-3">
+                <label class="form-label">Fecha de Inicio</label>
+                <input type="text" class="form-control" name="fecha_inicio" required [(ngModel)]="model.fecha_inicio"
+                    #fecha_inicio="ngModel">
+
+                @if (fecha_inicio.invalid && fecha_inicio.touched) {
+                <div class="text-danger small">
+                    Este campo es obligatorio
+                </div>
+                }
+            </div>
+            <!-- Activo -->
+            <div class="mb-3">
+                <label class="form-label">Activo</label>
+                <select class="form-select" name="activo" required [(ngModel)]="model.activo" #confirma="ngModel">
+                    <option value="">Selecciona...</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                @if (confirma.invalid && confirma.touched) {
+                <div class="text-danger small">
+                    Seleccione una opción
+                </div>
+                }
+            </div>
+
+            <!-- ID Servicio -->
+            <div class="mb-3">
+                <label class="form-label">ID Servicio</label>
+                <input type="number" class="form-control" name="id_servicio" min="1" required
+                    [(ngModel)]="model.id_servicio" #id_servicio="ngModel">
+
+                @if (id_servicio.invalid && id_servicio.touched) {
+                <div class="text-danger small">
+                    Deben de ser de al menos 1
+                </div>
+                }
+            </div>
+
+        </form>
+    </div>
+</div>
