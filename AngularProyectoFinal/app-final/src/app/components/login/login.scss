@@ -1,0 +1,19 @@
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // Usamos un fondo que te gusta
+    background: linear-gradient(135deg, #547071 0%, #87A1AB 50%, #C8DFE2 100%);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card-header{
+  background-color: #547071;
+}

@@ -40,8 +40,8 @@
 
       <ul class="navbar-nav ms-auto">
         <li class="nav-item logout">
-          <a routerLink="/" class="nav-link logout-link">
-            <i class="bi bi-box-arrow-right"></i>
+          <a (click)="onLogout()" class="nav-link logout-link cursor-pointer" title="Cerrar Sesión">
+            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
           </a>
         </li>
       </ul>

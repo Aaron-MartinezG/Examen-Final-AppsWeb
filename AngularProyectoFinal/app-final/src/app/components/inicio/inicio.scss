@@ -1,11 +1,8 @@
 // Altura de la Navbar de Bootstrap (Ajusta si tu Navbar es más alta/baja)
 $navbar-height: 56px;
 
-/* ------------------------------------------- */
-/* SECCIÓN HERO (PANTALLA COMPLETA)            */
-/* ------------------------------------------- */
+
 .hero-full-screen {
-    // Altura clave: 100% de la ventana menos el Navbar
     height: calc(100vh - #{$navbar-height});
 
     // Fondo degradado
@@ -28,9 +25,7 @@ $navbar-height: 56px;
 }
 
 
-/* ------------------------------------------- */
-/* CARRUSEL Y CONTENIDO SECUNDARIO             */
-/* ------------------------------------------- */
+
 .carousel-img {
     height: 500px;
     object-fit: cover;
